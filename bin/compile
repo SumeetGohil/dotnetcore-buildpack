@@ -38,15 +38,17 @@ export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}"
 cd $BUILD_DIR
 dotnet --info
 
-PROJECT_FILE=$(x=$(dirname $(find ${BUILD_DIR} -maxdepth 5 -iname Startup.cs | head -1)); while [[ "$x" =~ $BUILD_DIR ]] ; do find "$x" -maxdepth 1 -name *.csproj; x=`dirname "$x"`; done)
+PROJECT_FILE=$(x=$(dirname $(find ${BUILD_DIR} -maxdepth 5 -iname web.config | head -1)); while [[ "$x" =~ $BUILD_DIR ]] ; do find "$x" -maxdepth 1 -name *.csproj; x=`dirname "$x"`; done)
 PROJECT_NAME=$(basename ${PROJECT_FILE%.*})
 
-echo "restore ${PROJECT_FILE}"
-dotnet restore $PROJECT_FILE
+echo "Project File ${PROJECT_FILE}"
+echo "Project Name ${PROJECT_FILE}"
 
-echo "publish ${PROJECT_FILE}"
-dotnet publish $PROJECT_FILE --output ${BUILD_DIR}/heroku_publish --configuration Release
+#dotnet restore $PROJECT_FILE
+
+
+#dotnet publish $PROJECT_FILE --output ${BUILD_DIR}/heroku_publish --configuration Release
 
 cat << EOT >> ${BUILD_DIR}/Procfile
-web: cd \$HOME/heroku_publish && ASPNETCORE_URLS='http://+:\$PORT' dotnet "./${PROJECT_NAME}.dll" --server.urls http://+:\$PORT
+web: cd \$HOME && ASPNETCORE_URLS='http://+:\$PORT' dotnet "./${PROJECT_NAME}.dll" --server.urls http://+:\$PORT
 EOT
