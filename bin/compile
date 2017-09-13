@@ -38,11 +38,11 @@ export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}"
 cd $BUILD_DIR
 dotnet --info
 
-PROJECT_FILE=$(x=$(dirname $(find ${BUILD_DIR} -maxdepth 5 -iname web.config | head -1)); while [[ "$x" =~ $BUILD_DIR ]] ; do find "$x" -maxdepth 1 -name *.csproj; x=`dirname "$x"`; done)
-echo "Project File ${PROJECT_FILE}"
+# PROJECT_FILE=$(x=$(dirname $(find ${BUILD_DIR} -maxdepth 5 -iname web.config | head -1)); while [[ "$x" =~ $BUILD_DIR ]] ; do find "$x" -maxdepth 1 -name *.csproj; x=`dirname "$x"`; done)
+# echo "Project File ${PROJECT_FILE}"
 
-PROJECT_NAME=$(basename ${PROJECT_FILE%.*})
-echo "Project Name ${PROJECT_FILE}"
+PROJECT_NAME="TestHerokuApi"
+# echo "Project Name ${PROJECT_FILE}"
 
 #dotnet restore $PROJECT_FILE
 
