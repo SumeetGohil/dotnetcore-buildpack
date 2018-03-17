@@ -34,6 +34,7 @@ install_dotnet $BUILD_DIR
 
 export PATH="/app/dotnet:${PATH}"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}"
+export ASPNETCORE_ENVIRONMENT="Staging"
 
 cd $BUILD_DIR
 dotnet --info
@@ -42,6 +43,7 @@ PROJECT_FILE=$(basename $(find *.runtimeconfig.json))
 
 PROJECT_NAME=${PROJECT_FILE%.*.*}
 echo "Project Name ${PROJECT_NAME}"
+echo "ASPNETCORE_ENVIRONMENT Project ENV ${ASPNETCORE_ENVIRONMENT}"
 
 #dotnet restore $PROJECT_FILE
 
