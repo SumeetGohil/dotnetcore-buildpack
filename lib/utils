@@ -4,7 +4,7 @@ function install_dotnet() {
   local BUILD_DIR="$1"
 
   # https://www.microsoft.com/net/download/linux Ubuntu 16.04 1.0.4 LTS
-  curl -sSL -o dotnet.tar.gz https://download.microsoft.com/download/E/7/8/E782433E-7737-4E6C-BFBF-290A0A81C3D7/dotnet-dev-ubuntu.16.04-x64.1.0.4.tar.gz
+  curl -sSL -o dotnet.tar.gz https://download.microsoft.com/download/1/1/5/115B762D-2B41-4AF3-9A63-92D9680B9409/dotnet-sdk-2.1.4-linux-x64.tar.gz
   mkdir -p ${BUILD_DIR}/.heroku/dotnet && tar zxf dotnet.tar.gz -C ${BUILD_DIR}/.heroku/dotnet
   ln -s ${BUILD_DIR}/.heroku/dotnet /app
 }
@@ -65,6 +65,7 @@ function apt_install(){
   export CPATH="${INCLUDE_PATH-}"
   export CPPPATH="${INCLUDE_PATH-}"
   export PKG_CONFIG_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu/pkgconfig:$BUILD_DIR/.apt/usr/lib/pkgconfig:${PKG_CONFIG_PATH-}"
+  export ASPNETCORE_ENVIRONMENT="Staging"
   echo "APT packages Installled"
 }
 
